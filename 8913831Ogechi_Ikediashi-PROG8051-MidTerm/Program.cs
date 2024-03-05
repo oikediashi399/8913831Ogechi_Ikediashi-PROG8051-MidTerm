@@ -36,18 +36,22 @@ public class InventoryItem
     public void RestockItem(int additionalQuantity)
     {
         QuantityInStock += additionalQuantity;
-        Console.WriteLine($"Restocked {additionalQuantity} {ItemName}(s). New stock: {QuantityInStock} \n");
+        Console.WriteLine($"\nRestocked {additionalQuantity} {ItemName}(s). New stock: {QuantityInStock} \n");
     }
 
     // Method 3 to sell a specified quantity of the inventory item
     public void SellItem(int quantitySold)
     {
+        if (quantitySold < 0)
+        {
+            Console.WriteLine("\nInvalid number of items requested for.");
+        }
         // Checking if there is enough stock to sell
-        if (quantitySold <= QuantityInStock)
+        else if (quantitySold <= QuantityInStock)
         {
             // Decreasing the item's stock quantity by the quantity sold.
             QuantityInStock -= quantitySold;
-            Console.WriteLine($"Sold {quantitySold} {ItemName}(s). New stock: {QuantityInStock} \n");
+            Console.WriteLine($"\nSold {quantitySold} {ItemName}(s). New stock: {QuantityInStock}");
         }
         else
         // Ensuring the stock doesn't go negative.
@@ -86,7 +90,7 @@ class Program
         InventoryItem item4 = new InventoryItem("iPhone Charger", 9000004, 99.99, 100);
         InventoryItem item5 = new InventoryItem("LQWell Mini Projector", 9000005, 199.99, 15);
 
-        Console.WriteLine("Items In Store includes:  \n");
+        Console.WriteLine("Items In Store includes: \n");
 
         // 1. Print details of all the inventory items
         item1.PrintDetails();
@@ -96,15 +100,19 @@ class Program
         item5.PrintDetails();
 
         // 2. Sell some items and print updated details
-        item1.SellItem(5);
+        item1.SellItem(-10);
         item2.SellItem(3);
+        item3.SellItem(3);
 
         // 3. Restock an item and print updated details
-        item1.RestockItem(7);
+        item3.RestockItem(7);
 
         // 4. Check if items are in stock and print a message accordingly
         Console.WriteLine($"Is {item1.ItemName} in stock? {item1.IsInStock()}");
-        Console.WriteLine($"Is {item2.ItemName} in stock? {item2.IsInStock()} \n");
+        Console.WriteLine($"Is {item2.ItemName} in stock? {item2.IsInStock()}");
+        Console.WriteLine($"Is {item3.ItemName} in stock? {item3.IsInStock()}");
+        Console.WriteLine($"Is {item4.ItemName} in stock? {item4.IsInStock()}");
+        Console.WriteLine($"Is {item5.ItemName} in stock? {item5.IsInStock()} \n");
 
     }
 }
