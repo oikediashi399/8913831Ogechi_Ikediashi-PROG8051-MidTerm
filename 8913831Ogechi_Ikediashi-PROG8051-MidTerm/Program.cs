@@ -35,13 +35,22 @@ public class InventoryItem
     // Method 2 to restock the inventory item. This method will increase the item's stock quantity by the additional quantity.
     public void RestockItem(int additionalQuantity)
     {
-        QuantityInStock += additionalQuantity;
-        Console.WriteLine($"\nRestocked {additionalQuantity} {ItemName}(s). New stock: {QuantityInStock} \n");
+        // Checking additionalQuantity to avoid negative entry
+        if (additionalQuantity < 0)
+        {
+            Console.WriteLine("\nInvalid number of items requested to be restocked.\n");
+        }
+        else
+        {
+            QuantityInStock += additionalQuantity;
+            Console.WriteLine($"\nRestocked {additionalQuantity} {ItemName}(s). New stock: {QuantityInStock} \n");
+        }
     }
 
     // Method 3 to sell a specified quantity of the inventory item
     public void SellItem(int quantitySold)
     {
+        // Checking quantitySold to avoid negative entry
         if (quantitySold < 0)
         {
             Console.WriteLine("\nInvalid number of items requested for.");
@@ -105,7 +114,7 @@ class Program
         item3.SellItem(3);
 
         // 3. Restock an item and print updated details
-        item3.RestockItem(7);
+        item3.RestockItem(-7);
 
         // 4. Check if items are in stock and print a message accordingly
         Console.WriteLine($"Is {item1.ItemName} in stock? {item1.IsInStock()}");
