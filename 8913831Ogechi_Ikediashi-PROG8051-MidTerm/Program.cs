@@ -109,12 +109,12 @@ class Program
         item5.PrintDetails();
 
         // 2. Sell some items and print updated details
-        item1.SellItem(-10);
+        item1.SellItem(10);
         item2.SellItem(3);
-        item3.SellItem(3);
+        item3.SellItem(5);
 
         // 3. Restock an item and print updated details
-        item3.RestockItem(-7);
+        item3.RestockItem(7);
 
         // 4. Check if items are in stock and print a message accordingly
         Console.WriteLine($"Is {item1.ItemName} in stock? {item1.IsInStock()}");
